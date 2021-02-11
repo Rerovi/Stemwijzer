@@ -2,3 +2,30 @@ body {
     background-image: url("img/stemwijzer.png");
     background-color: grey;
 }
+
+button {
+    all: unset;
+    color: black;
+    background-color: blue;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+.container {
+    padding: 10px;
+    margin: auto;
+    width: 90%;
+    height: 550px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+#terug:hover {
+    cursor: pointer;
+    width: 20px;
+}
