@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="43811536-e6a1-40ff-9812-342cffb91379" name="Default Changelist" comment="">
+    <list default="true" id="43811536-e6a1-40ff-9812-342cffb91379" name="Default Changelist" comment="Adding background image">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +38,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -58,7 +62,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1612876957590</updated>
-      <workItem from="1612876959837" duration="851000" />
+      <workItem from="1612876959837" duration="2356000" />
+      <workItem from="1612945970434" duration="5704000" />
+      <workItem from="1613032699237" duration="517000" />
     </task>
     <servers />
   </component>
@@ -70,10 +76,16 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Adding background image" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding background image" />
   </component>
 </project>
