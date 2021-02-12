@@ -10,6 +10,7 @@ button {
     width: 100px;
     height: 40px;
     cursor: pointer;
+    text-align: center;
 }
 button:hover {
     background-color: black;
@@ -23,6 +24,10 @@ button:hover {
     height: 550px;
     border-radius: 20px;
     background-color: white;
+}
+
+.text-container {
+    background-color: gray;
 }
 
 #terug:hover {
