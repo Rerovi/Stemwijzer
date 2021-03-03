@@ -13,11 +13,15 @@ let answerCount = 0;
 let answerObj = {};
 let score = [];
 
+for (let i = 0; i < parties.length; i++) {
+    score[i] = {
+        naam: parties[i].name,
+        punten: 0,
+    }
+}
+
 let count = Object.keys(subjects).length;
 
-for (let i = 0; i < count; i++) {
-    answerObj[i] = "";
-}
 geenBttn.style.display = "none";
 oneensBttn.style.display = "none";
 overslaBttn.style.display = "none";
@@ -26,13 +30,12 @@ terugBttn.style.display = "none";
 
 function antwoord(antwoord) {
     if (antwoord == "overslaan") {
+        answerObj[answerCount - 1] = "";
         console.log("overslaan");
         answerCount++;
         console.log(answerCount);
     } else {
-        if (answerCount == count) {
-            partijBerekening();
-        } else if (answerCount == 0) {
+        if (answerCount == 0) {
             answerCount++;
             eensBttn.innerHTML = "Eens";
             geenBttn.style.display = "inline-block";
@@ -47,9 +50,17 @@ function antwoord(antwoord) {
             console.log(answerCount);
         }
     }
-    titel.innerHTML = answerCount + ". " + subjects[answerCount - 1].title;
-    titelTekst.innerHTML = subjects[answerCount - 1].statement;
-    knopKleur()
+    if (answerCount == count + 1) {
+        partijBerekening();
+        eindscherm();
+        console.log(answerObj);
+        console.log(answerCount);
+    } else {
+        titel.innerHTML = answerCount + ". " + subjects[answerCount - 1].title;
+        titelTekst.innerHTML = subjects[answerCount - 1].statement;
+        knopKleur()
+    }
+
 
 }
 
@@ -74,68 +85,49 @@ function knopKleur() {
     }
 }
 
-
 function partijBerekening() {
-    alert("laatste vraag");
+    for (let i = 0; i < subjects.length; i++) {
+        for (let j = 0; j < subjects[i].parties.length; j++) {
+            if (answerObj[i] == subjects[i].parties[j].position) {
+                for (let l = 0; l < score.length; l++) {
+                    score[l].punten = score[l].punten + 1;
+                }
+            }
+        }
+    }
+
+    // for (let m = 0; m < subjects.length; m++) {
+    //     score[m].punten = score[m].punten / subjects.length * 100;
+    // }
+    console.log(score);
 }
 
-// function eens() {
-//     if (answerCount == 0) {
-//         eensBttn.innerHTML = "Eens";
-//         geenBttn.style.display = "inline-block";
-//         oneensBttn.style.display = "inline-block";
-//         overslaBttn.style.display = "inline-block";
-//         progressieBalk.style.display = "inline-block";
-//     } else {
-//         answerObj[answerCount] = "eens";
-//     }
-//     volgendeVraag();
-// }
-//
-// // function geen() {
-// //     answerObj[answerCount] = "geen";
-// //     volgendeVraag()
-// // }
-// //
-// // function oneens() {
-// //     answerObj[answerCount] = "oneens";
-// //     volgendeVraag();
-// // }
-// //
-// // function overslaan() {
-// //     answerObj[answerCount] = "overgeslagen";
-// //     volgendeVraag();
-// // }
+function eindscherm() {
+    verwijder();
+}
 
+function verwijder() {
+    titel.innerText = "";
+    titelTekst.innerText = "";
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].style.display = "none";
+    }
+}
 
-// function vraagTerug() {
-//     if (answerCount == 1) {
-//         alert("Dit is de eerste vraag");
-//     } else {
-//         answerCount--;
-//         console.log("vraag terug");
-//         titel.innerHTML = answerCount + ". " + subjects[answerCount - 1].title;
-//         titelTekst.innerHTML = subjects[answerCount - 1].statement;
-//         if (answerObj[answerCount] == "eens") {
-//             eensBttn.style.backgroundColor = "blue";
-//             geenBttn.style.backgroundColor = "gray";
-//             oneensBttn.style.backgroundColor = "gray";
-//         } else if (answerObj[answerCount] == "geen") {
-//             eensBttn.style.backgroundColor = "gray";
-//             geenBttn.style.backgroundColor = "blue";
-//             oneensBttn.style.backgroundColor = "gray";
-//         } else if (answerObj[answerCount] == "oneens") {
-//             eensBttn.style.backgroundColor = "gray";
-//             geenBttn.style.backgroundColor = "gray";
-//             oneensBttn.style.backgroundColor = "blue";
+// function match() {
+//     for (let m = 0; m < subjects.length; m++) {
+//         for (let i = 0; i < subjects[m].parties.length; i++) {
+//             if (answers[m] == subjects[m].parties[i].position) {
+//                 for (let p = 0; p < scores.length; p++) {
+// //                     if (subjects[m].parties[i].name == scores[p].name) {
+//                         if (questions[m].important) {
+//                             scores[p].score = scores[p].score + 2;
+//                         } else {
+//                             scores[p].score = scores[p].score + 1;
+//                         }
+//                     }
+//                 }
+//             }
 //         }
 //     }
 // }
-
-// overslaBttn.onclick = overslaan;
-// terugBttn.onclick = vraagTerug;
-//
-// geenBttn.style.display = "none";
-// oneensBttn.style.display = "none";
-// overslaBttn.style.display = "none";
-
