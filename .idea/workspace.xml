@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +68,9 @@
       <workItem from="1613123566677" duration="7812000" />
       <workItem from="1613314606456" duration="6553000" />
       <workItem from="1613464102306" duration="16510000" />
-      <workItem from="1614761194290" duration="5345000" />
+      <workItem from="1614761194290" duration="5401000" />
+      <workItem from="1614767939720" duration="685000" />
+      <workItem from="1615278712869" duration="8579000" />
     </task>
     <task id="LOCAL-00001" summary="Adding background image">
       <created>1613033261604</created>

@@ -8,25 +8,28 @@ const progressieBalk = document.getElementById("progressie");
 
 const titel = document.getElementById("vraag");
 const titelTekst = document.getElementById("vraag-tekst");
-
-let answerCount = 0;
-let answerObj = {};
-let score = [];
-
-for (let i = 0; i < parties.length; i++) {
-    score[i] = {
-        naam: parties[i].name,
-        punten: 0,
-    }
-}
+const lijst = document.getElementById("uitslag-lijst");
+const primairBox = document.getElementById("primair");
+const secundairBox = document.getElementById("secundair");
 
 let count = Object.keys(subjects).length;
+let answerCount = 0;
+let answerObj = {};
+let score = {};
+let sort = [];
+
+for (let i = 0; i < parties.length; i++) {
+    score[parties[i].name] = 0;
+}
 
 geenBttn.style.display = "none";
 oneensBttn.style.display = "none";
 overslaBttn.style.display = "none";
 terugBttn.style.display = "none";
 
+oneensBttn.onclick = () => antwoord('contra');
+geenBttn.onclick = () => antwoord('none');
+eensBttn.onclick = () => antwoord('pro');
 
 function antwoord(antwoord) {
     if (antwoord == "overslaan") {
@@ -38,6 +41,7 @@ function antwoord(antwoord) {
         if (answerCount == 0) {
             answerCount++;
             eensBttn.innerHTML = "Eens";
+            lijst.innerHTML = "";
             geenBttn.style.display = "inline-block";
             oneensBttn.style.display = "inline-block";
             overslaBttn.style.display = "inline-block";
@@ -89,21 +93,25 @@ function partijBerekening() {
     for (let i = 0; i < subjects.length; i++) {
         for (let j = 0; j < subjects[i].parties.length; j++) {
             if (answerObj[i] == subjects[i].parties[j].position) {
-                for (let l = 0; l < score.length; l++) {
-                    score[l].punten = score[l].punten + 1;
-                }
+                score[subjects[i].parties[j].name]++;
             }
         }
     }
-
-    // for (let m = 0; m < subjects.length; m++) {
-    //     score[m].punten = score[m].punten / subjects.length * 100;
-    // }
-    console.log(score);
+    for (let key in score) {
+        score[key] = score[key] / subjects.length * 100;
+    }
 }
 
 function eindscherm() {
+    sorteerObject();
     verwijder();
+    var lijstItems = [];
+    titel.innerHTML = "Uitslagen!";
+    for (let i = 0; i < parties.length; i++) {
+        lijstItems[i] = document.createElement("LI");
+        lijst.appendChild(lijstItems[i]);
+        lijstItems[i].innerHTML = sort[i][0] + " " + sort[i][1]+"%";
+    }
 }
 
 function verwijder() {
@@ -114,20 +122,11 @@ function verwijder() {
     }
 }
 
-// function match() {
-//     for (let m = 0; m < subjects.length; m++) {
-//         for (let i = 0; i < subjects[m].parties.length; i++) {
-//             if (answers[m] == subjects[m].parties[i].position) {
-//                 for (let p = 0; p < scores.length; p++) {
-// //                     if (subjects[m].parties[i].name == scores[p].name) {
-//                         if (questions[m].important) {
-//                             scores[p].score = scores[p].score + 2;
-//                         } else {
-//                             scores[p].score = scores[p].score + 1;
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
+function sorteerObject() {
+    for (let key in score) {
+        sort.push([key, score[key]]);
+    }
+    sort.sort(function(a, b) {
+        return b[1] - a[1];
+    });
+}
