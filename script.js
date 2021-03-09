@@ -18,10 +18,6 @@ let answerObj = {};
 let score = {};
 let sort = [];
 
-for (let i = 0; i < parties.length; i++) {
-    score[parties[i].name] = 0;
-}
-
 geenBttn.style.display = "none";
 oneensBttn.style.display = "none";
 overslaBttn.style.display = "none";
@@ -32,40 +28,43 @@ geenBttn.onclick = () => antwoord('none');
 eensBttn.onclick = () => antwoord('pro');
 
 function antwoord(antwoord) {
-    if (antwoord == "overslaan") {
-        answerObj[answerCount - 1] = "";
-        console.log("overslaan");
-        answerCount++;
-        console.log(answerCount);
-    } else {
-        if (answerCount == 0) {
+    if (primairBox.checked || secundairBox.checked) {
+        partijSelectie();
+        if (antwoord == "overslaan") {
+            answerObj[answerCount - 1] = "";
+            console.log("overslaan");
             answerCount++;
-            eensBttn.innerHTML = "Eens";
-            lijst.innerHTML = "";
-            geenBttn.style.display = "inline-block";
-            oneensBttn.style.display = "inline-block";
-            overslaBttn.style.display = "inline-block";
-            terugBttn.style.display = "inline-block";
+            console.log(answerCount);
         } else {
-            knopKleur();
-            answerObj[answerCount - 1] = antwoord;
-            answerCount++;
+            if (answerCount == 0) {
+                answerCount++;
+                eensBttn.innerHTML = "Eens";
+                lijst.innerHTML = "";
+                geenBttn.style.display = "inline-block";
+                oneensBttn.style.display = "inline-block";
+                overslaBttn.style.display = "inline-block";
+                terugBttn.style.display = "inline-block";
+            } else {
+                knopKleur();
+                answerObj[answerCount - 1] = antwoord;
+                answerCount++;
+                console.log(answerObj);
+                console.log(answerCount);
+            }
+        }
+        if (answerCount == count + 1) {
+            partijBerekening();
+            eindscherm();
             console.log(answerObj);
             console.log(answerCount);
+        } else {
+            titel.innerHTML = answerCount + ". " + subjects[answerCount - 1].title;
+            titelTekst.innerHTML = subjects[answerCount - 1].statement;
+            knopKleur()
         }
-    }
-    if (answerCount == count + 1) {
-        partijBerekening();
-        eindscherm();
-        console.log(answerObj);
-        console.log(answerCount);
     } else {
-        titel.innerHTML = answerCount + ". " + subjects[answerCount - 1].title;
-        titelTekst.innerHTML = subjects[answerCount - 1].statement;
-        knopKleur()
+        alert("U moet minstens 1 optie aanklikken!");
     }
-
-
 }
 
 function vraagTerug() {
@@ -110,7 +109,7 @@ function eindscherm() {
     for (let i = 0; i < parties.length; i++) {
         lijstItems[i] = document.createElement("LI");
         lijst.appendChild(lijstItems[i]);
-        lijstItems[i].innerHTML = sort[i][0] + " " + sort[i][1]+"%";
+        lijstItems[i].innerHTML = sort[i][0] + " " + sort[i][1] + "%";
     }
 }
 
@@ -126,7 +125,26 @@ function sorteerObject() {
     for (let key in score) {
         sort.push([key, score[key]]);
     }
-    sort.sort(function(a, b) {
+    sort.sort(function (a, b) {
         return b[1] - a[1];
     });
+}
+
+function partijSelectie() {
+    for (let i = 0; i < parties.length; i++) {
+        if (primairBox.checked) {
+            if (parties[i].size >= 10) {
+                score[parties[i].name] = 0;
+            } else {
+            }
+        } else if (secundairBox.checked) {
+            if (parties[i].size <= 10) {
+                score[parties[i].name] = 0;
+            } else {
+            }
+        } else if (primairBox.checked && secundairBox.checked) {
+            score[parties[i].name] = 0;
+        }
+    }
+    console.log(score);
 }
