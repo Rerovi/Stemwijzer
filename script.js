@@ -27,6 +27,25 @@ oneensBttn.onclick = () => antwoord('contra');
 geenBttn.onclick = () => antwoord('none');
 eensBttn.onclick = () => antwoord('pro');
 
+function partijSelectie() {
+    for (let i = 0; i < parties.length; i++) {
+        if (primairBox.checked) {
+            if (parties[i].size >= 10) {
+                score[parties[i].name] = 0;
+            } else {
+            }
+        } else if (secundairBox.checked) {
+            if (parties[i].size <= 10) {
+                score[parties[i].name] = 0;
+            } else {
+            }
+        } else if (primairBox.checked && secundairBox.checked) {
+            score[parties[i].name] = 0;
+        }
+    }
+    console.log(score);
+}
+
 function antwoord(antwoord) {
     if (primairBox.checked || secundairBox.checked) {
         partijSelectie();
@@ -88,6 +107,15 @@ function knopKleur() {
     }
 }
 
+function sorteerObject() {
+    for (let key in score) {
+        sort.push([key, score[key]]);
+    }
+    sort.sort(function (a, b) {
+        return b[1] - a[1];
+    });
+}
+
 function partijBerekening() {
     for (let i = 0; i < subjects.length; i++) {
         for (let j = 0; j < subjects[i].parties.length; j++) {
@@ -97,8 +125,15 @@ function partijBerekening() {
         }
     }
     for (let key in score) {
-        score[key] = score[key] / subjects.length * 100;
+        let berekening = score[key] / subjects.length * 100;
+        afrond(berekening, score[key]);
+        console.log(score)
     }
+}
+
+function afrond(s, k) {
+    score[k] = Math.round(s * 100) / 100;
+    return s;
 }
 
 function eindscherm() {
@@ -119,32 +154,4 @@ function verwijder() {
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].style.display = "none";
     }
-}
-
-function sorteerObject() {
-    for (let key in score) {
-        sort.push([key, score[key]]);
-    }
-    sort.sort(function (a, b) {
-        return b[1] - a[1];
-    });
-}
-
-function partijSelectie() {
-    for (let i = 0; i < parties.length; i++) {
-        if (primairBox.checked) {
-            if (parties[i].size >= 10) {
-                score[parties[i].name] = 0;
-            } else {
-            }
-        } else if (secundairBox.checked) {
-            if (parties[i].size <= 10) {
-                score[parties[i].name] = 0;
-            } else {
-            }
-        } else if (primairBox.checked && secundairBox.checked) {
-            score[parties[i].name] = 0;
-        }
-    }
-    console.log(score);
 }
