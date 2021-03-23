@@ -17,6 +17,7 @@ let answerCount = 0;
 let answerObj = {};
 let score = {};
 let sort = [];
+let check;
 
 geenBttn.style.display = "none";
 oneensBttn.style.display = "none";
@@ -26,24 +27,41 @@ terugBttn.style.display = "none";
 oneensBttn.onclick = () => antwoord('contra');
 geenBttn.onclick = () => antwoord('none');
 eensBttn.onclick = () => antwoord('pro');
+overslaBttn.onclick = () => antwoord('overslaan');
 
 function partijSelectie() {
     for (let i = 0; i < parties.length; i++) {
-        if (primairBox.checked) {
-            if (parties[i].size >= 10) {
-                score[parties[i].name] = 0;
-            } else {
-            }
+        if (primairBox.checked && secundairBox.checked) {
+            check = "beide";
+            score[parties[i].name] = 0;
         } else if (secundairBox.checked) {
+            check = "secundair";
             if (parties[i].size <= 10) {
                 score[parties[i].name] = 0;
             } else {
             }
-        } else if (primairBox.checked && secundairBox.checked) {
-            score[parties[i].name] = 0;
+        } else if (primairBox.checked) {
+            check = "primair";
+            if (parties[i].size >= 10) {
+                score[parties[i].name] = 0;
+            } else {
+            }
         }
     }
     console.log(score);
+}
+
+function knopKleur() {
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].style.backgroundColor = "gray";
+    }
+    if (answerObj[answerCount - 1] == "pro") {
+        eensBttn.style.backgroundColor = "blue";
+    } else if (answerObj[answerCount - 1] == "none") {
+        geenBttn.style.backgroundColor = "blue";
+    } else if (answerObj[answerCount - 1] == "contra") {
+        oneensBttn.style.backgroundColor = "blue";
+    }
 }
 
 function antwoord(antwoord) {
@@ -94,58 +112,30 @@ function vraagTerug() {
     knopKleur();
 }
 
-function knopKleur() {
-    for (let i = 0; i < buttons.length; i++) {
-        buttons[i].style.backgroundColor = "gray";
+function partijBerekening() {
+    for (let i = 0; i < subjects.length; i++) {
+        for (let j = 0; j < subjects[i].parties.length; j++) {
+            if (answerObj[i] == subjects[i].parties[j].position) {
+                console.log(score);
+                score[subjects[i].parties[j].name]++;
+            }
+        }
     }
-    if (answerObj[answerCount - 1] == "pro") {
-        eensBttn.style.backgroundColor = "blue";
-    } else if (answerObj[answerCount - 1] == "none") {
-        geenBttn.style.backgroundColor = "blue";
-    } else if (answerObj[answerCount - 1] == "contra") {
-        oneensBttn.style.backgroundColor = "blue";
+    for (let key in score) {
+        score[key] = score[key] / subjects.length * 100;
+        score[key] = Math.round(score[key] * 100) / 100;
+
     }
 }
 
 function sorteerObject() {
+    console.log(sort);
     for (let key in score) {
         sort.push([key, score[key]]);
     }
     sort.sort(function (a, b) {
         return b[1] - a[1];
     });
-}
-
-function partijBerekening() {
-    for (let i = 0; i < subjects.length; i++) {
-        for (let j = 0; j < subjects[i].parties.length; j++) {
-            if (answerObj[i] == subjects[i].parties[j].position) {
-                score[subjects[i].parties[j].name]++;
-            }
-        }
-    }
-    for (let key in score) {
-        let berekening = score[key] / subjects.length * 100;
-        afrond(berekening, score[key]);
-        console.log(score)
-    }
-}
-
-function afrond(s, k) {
-    score[k] = Math.round(s * 100) / 100;
-    return s;
-}
-
-function eindscherm() {
-    sorteerObject();
-    verwijder();
-    var lijstItems = [];
-    titel.innerHTML = "Uitslagen!";
-    for (let i = 0; i < parties.length; i++) {
-        lijstItems[i] = document.createElement("LI");
-        lijst.appendChild(lijstItems[i]);
-        lijstItems[i].innerHTML = sort[i][0] + " " + sort[i][1] + "%";
-    }
 }
 
 function verwijder() {
@@ -155,3 +145,20 @@ function verwijder() {
         buttons[i].style.display = "none";
     }
 }
+
+function eindscherm() {
+    sorteerObject();
+    verwijder();
+    var lijstItems = [];
+    titel.innerHTML = "Uitslagen!";
+    for (let i = 0; i < Object.keys(sort).length; i++) {
+        if (Number.isNaN(sort[i][1])) {
+            delete sort[i];
+        }
+        lijstItems[i] = document.createElement("LI");
+        lijst.appendChild(lijstItems[i]);
+        lijstItems[i].innerHTML = sort[i][0] + " " + sort[i][1] + "%";
+    }
+}
+
+
