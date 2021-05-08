@@ -1,5 +1,6 @@
 body {
     background-image: url("img/stemwijzer.png");
+    background-size: cover;
 }
 
 button {
@@ -43,5 +44,8 @@ li {
     width: 5%;
     height: 10px;
     background-color: blue;
+    display: none;
+}
+#geen, #overslaan, #oneens, #terug {
     display: none;
 }

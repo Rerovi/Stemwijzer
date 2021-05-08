@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +73,11 @@
       <workItem from="1615278712869" duration="12198000" />
       <workItem from="1615983933252" duration="1870000" />
       <workItem from="1616079893542" duration="1864000" />
-      <workItem from="1616488742989" duration="6383000" />
+      <workItem from="1616488742989" duration="7034000" />
+      <workItem from="1618152828351" duration="5042000" />
+      <workItem from="1618558516980" duration="3871000" />
+      <workItem from="1618907632301" duration="6780000" />
+      <workItem from="1620477097046" duration="1181000" />
     </task>
     <task id="LOCAL-00001" summary="Adding background image">
       <created>1613033261604</created>
@@ -103,5 +108,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Adding background image" />
     <option name="LAST_COMMIT_MESSAGE" value="Adding background image" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/script.js</url>
+          <line>65</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
