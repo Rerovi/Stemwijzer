@@ -4,7 +4,6 @@ const oneensBttn = document.getElementById("oneens");
 const overslaBttn = document.getElementById("overslaan");
 const terugBttn = document.getElementById("terug");
 const buttons = document.getElementsByClassName("button");
-const progressieBalk = document.getElementById("progressie");
 
 const titel = document.getElementById("vraag");
 const titelTekst = document.getElementById("vraag-tekst");
@@ -51,7 +50,6 @@ function partijSelectie() {
             }
         }
     }
-    console.log(score);
 }
 
 function vraagWegingen() {
@@ -103,15 +101,12 @@ function antwoord(antwoord) {
                     weging[i] = 1;
                 }
             }
-            console.log(weging);
             partijSelectie();
             if (stop == true) {
             } else if (stop == false) {
                 if (antwoord == "overslaan") {
                     answerObj[answerCount - 1] = "";
-                    console.log("overslaan");
                     answerCount++;
-                    console.log(answerCount);
                 } else {
                     if (answerCount == 0) {
                         answerCount++;
@@ -125,15 +120,11 @@ function antwoord(antwoord) {
                         knopKleur();
                         answerObj[answerCount - 1] = antwoord;
                         answerCount++;
-                        console.log(answerObj);
-                        console.log(answerCount);
                     }
                 }
                 if (answerCount == count + 1) {
                     partijBerekening();
                     eindscherm();
-                    console.log(answerObj);
-                    console.log(answerCount);
                 } else {
                     titel.innerHTML = answerCount + ". " + subjects[answerCount - 1].title;
                     titelTekst.innerHTML = subjects[answerCount - 1].statement;
@@ -155,7 +146,6 @@ function vraagTerug() {
         }
     } else {
         answerCount--;
-        console.log(answerCount);
         titel.innerHTML = answerCount + ". " + subjects[answerCount - 1].title;
         titelTekst.innerHTML = subjects[answerCount - 1].statement;
         knopKleur();
@@ -167,7 +157,6 @@ function partijBerekening() {
         for (let j = 0; j < subjects[i].parties.length; j++) {
             if (answerObj[i] == subjects[i].parties[j].position) {
                 score[parties[j].name] = weging[i];
-                console.log(score);
             }
         }
     }
@@ -179,7 +168,6 @@ function partijBerekening() {
 }
 
 function sorteerObject() {
-    console.log(sort);
     for (let key in score) {
         sort.push([key, score[key]]);
     }
